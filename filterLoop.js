@@ -17,7 +17,7 @@ export function filterRecipesBySearch(recipes, userInput) {
 }
 
 //FILTRE PRINCIPALE  (for)
-function getFilterForRecipes(recipes, userInput) {
+export function filterRecipesBySearchFor(recipes, userInput) {
 	const recipiesFormat = [];
 	for (let i = 0; i < recipes.length; i++) {
 		let recipe = recipes[i];
@@ -42,7 +42,7 @@ searchInput.addEventListener("input", (e) => {
 	//Affichage recettes ,depuis la liste filté, de la recherche voulue
 	const filterRecipes = filterRecipesByTag(recipes, ...getfilter());
 	if (e.target.value.length > 2) {
-		createList(filterRecipesBySearch(filterRecipes, e.target.value));
+		createList(filterRecipesBySearchFor(filterRecipes, e.target.value));
 	} else {
 		//affichage de toute la liste de recette
 		createList(filterRecipes);
