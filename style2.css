@@ -1,0 +1,214 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	transition: all ease-in-out 300ms;
+}
+
+body {
+	font-family: "Lato", sans-serif;
+	font-weight: 400;
+	margin: 0;
+}
+
+/* --------------------------------------------------------------------------------- */
+/* LOGO */
+.logo {
+	height: 93px;
+	margin-top: 42px;
+}
+
+/* --------------------------------------------------------------------------------- */
+/* BARRE DE RECHERCHE */
+.txtSearch {
+	height: 70px;
+	width: 100%;
+	position: relative;
+}
+.txtSearch > input {
+	height: 70px;
+	width: 100%;
+	background-color: #e7e7e7;
+	border: none;
+	outline: none;
+	border-radius: 8px;
+	padding-left: 20px;
+	font-size: 18px;
+}
+.txtSearch > button {
+	height: 70px;
+	width: 70px;
+	position: absolute;
+	right: 0;
+	font-size: 32px;
+	border: none;
+	outline: none;
+	background-color: #e7e7e7;
+	border-radius: 8px;
+}
+
+/* --------------------------------------------------------------------------------- */
+/* Zone Filtres TAGS*/
+.zone-filtres {
+	display: flex;
+	flex-direction: row;
+}
+.filtres-actifs > div {
+	display: flex;
+	justify-content: space-between;
+	margin-right: 1em;
+}
+
+.tag-ingredients,
+.tag-appareils,
+.tag-ustensiles {
+	color: white;
+}
+.bg-bleu,
+.tag-ingredients {
+	background-color: #3282f7;
+}
+.bg-vert,
+.tag-appareils {
+	background-color: #5ec796;
+}
+.bg-rouge,
+.tag-ustensiles {
+	background-color: #ed6454;
+}
+.bg-bleu:hover,
+.tag-ingredients:hover {
+	background-color: #2c75e2;
+}
+.bg-vert:hover,
+.tag-appareils:hover {
+	background-color: #4a9e77;
+}
+.bg-rouge:hover,
+.tag-ustensiles:hover {
+	background-color: #d65a4c;
+}
+
+/* Zone Filtres DROPDOWNS*/
+.dropdowns {
+	position: relative;
+	display: inline-block;
+	color: white;
+	margin-right: 2%;
+}
+
+.dropdown-input {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.dropdown-input > input {
+	outline: none;
+	border: none;
+	background-color: transparent;
+	color: white;
+}
+.dropdown-input > input::placeholder {
+	color: white;
+	font-size: 1.3em;
+	font-weight: 600;
+}
+
+.show {
+	display: block;
+	display: flex;
+}
+
+/* --------------------------------------------------------------------------------- */
+/* articles des recettes */
+
+.card {
+	border: none;
+}
+
+.image {
+	height: 300px;
+	width: 100%;
+	background: #c7bebe;
+	border-radius: 8px 8px 0 0;
+	object-fit: cover;
+}
+
+.description {
+	background-color: #e7e7e7;
+	padding: 0;
+	margin: 0;
+	border-radius: 0 0 8px 8px;
+}
+.titre {
+	font-size: 18px;
+}
+.time {
+	font-size: 18px;
+}
+.time > i {
+	font-size: 20px;
+}
+.list {
+	list-style: none;
+	font-size: 12px;
+	font-weight: 400;
+}
+.txt {
+	font-size: 12px;
+	font-family: "Roboto", sans-serif;
+	max-height: 150px;
+	overflow: auto;
+	text-overflow: ellipsis;
+}
+.no-recipies {
+	display: none;
+}
+
+.dropdown-content {
+	position: absolute;
+	z-index: 1;
+	width: 100%;
+	display: flex;
+	width: 750px;
+	display: none;
+}
+
+.dropdown-content li {
+	list-style: none;
+	flex: 33.3%;
+}
+
+.tags {
+	padding: 10px 30px;
+	font-size: 1.2em;
+	color: #fff;
+	font-weight: 700;
+	margin: 5px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 5px;
+}
+
+.Ingredients-tag {
+	background: #3282f7;
+}
+.Ustensils-tag {
+	background: #ed6454;
+}
+.Appareils-tag {
+	background: #5ec796;
+}
+.tags i {
+	margin-left: 5px;
+	font-size: 15px;
+	font-size: 1.2em;
+}
+
+.filtres-actifs {
+	margin-bottom: 1rem !important;
+}
+.txtSearch {
+	margin-bottom: 1rem !important;
+}
