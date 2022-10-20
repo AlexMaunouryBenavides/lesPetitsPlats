@@ -25,8 +25,7 @@ function recipesList(item) {
 	const listeIngredient = ingredients
 		.map((infoIngredient) => {
 			return `
-				<li>
-					<strong>${infoIngredient.ingredient}</strong>:${
+				<li><strong>${infoIngredient.ingredient}</strong>: &nbsp; ${
 				infoIngredient.quantity ? infoIngredient.quantity : "" // supprime les undefined
 			}${
 				infoIngredient.unit ? infoIngredient.unit : "" // supprime les undefined

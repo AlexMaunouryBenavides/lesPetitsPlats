@@ -42,9 +42,10 @@ searchInput.addEventListener("input", (e) => {
 	//Affichage recettes ,depuis la liste filté, de la recherche voulue
 	const filterRecipes = filterRecipesByTag(recipes, ...getfilter());
 	if (e.target.value.length > 2) {
-		createList(filterRecipesBySearchFor(filterRecipes, e.target.value));
+		window.filteredRecipes = filterRecipesBySearchFor(window.filteredRecipes, e.target.value);
+		createList(window.filteredRecipes);
 	} else {
 		//affichage de toute la liste de recette
-		createList(filterRecipes);
+		createList(window.filteredRecipes);
 	}
 });

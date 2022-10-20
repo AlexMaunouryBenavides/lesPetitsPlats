@@ -106,15 +106,20 @@ function createTags(label, id, tableau) {
 // Fonction open/close(creer/detruit) liste des boutons
 function generateList(id, tableau) {
 	const input = document.getElementById(`input${id}`);
-
+	const btnDropdowns = document.querySelectorAll(".dropdowns"); //essaie changer la bordure des dropdowns
 	input.classList.add("close");
 	input.addEventListener("click", () => {
 		input.classList.toggle("close");
 		if (input.classList.contains("close")) {
 			const dropDown = document.getElementById(`${id}`);
+			btnDropdowns[0].style.background = "#3282f7";
 			dropDown.innerHTML = "";
 			dropDown.style.display = "none";
 		} else {
+			btnDropdowns[0].style.background = "red";
+			btnDropdowns[0].style.borderRadius = "";
+			//obj.style.removeProperty("border");
+
 			updateGenerateList(id, filterList(tableau, input.value));
 		}
 	});
@@ -144,7 +149,9 @@ function updateGenerateList(id, tableau) {
 			e.stopPropagation(); // block l 'event  du parent pour pallier à la fermture de la liste
 			const tag = createTags(element.innerHTML, id, tableau, filtres);
 			filtres.prepend(tag);
-			createList(filterRecipesByTag(recipes, ...getfilter()));
+			window.filteredRecipes = filterRecipesByTag(window.filteredRecipes, ...getfilter());
+			createList(window.filteredRecipes);
+
 			input.value = "";
 			const newTab = tableau.filter((elem) => elem !== element.innerHTML);
 			updateGenerateList(id, newTab);
@@ -195,18 +202,3 @@ function filterList(tableau, value) {
 	}
 	return tableau; //sinon retourne le tableau de base
 }
-
-/* // Fonction filtre des boutons avec boucle FOR
-
-function Filter2(tableau, inputValue) {
-	let tableauFilter = [];
-	for (let i = 0; i < tableau.length; i++) {
-		let element = tableau[i];
-
-		if (element.toLowerCase().includes(inputValue)) {
-			tableauFilter.push(element);
-		}
-	}
-
-	return tableauFilter;
-} */

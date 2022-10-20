@@ -177,6 +177,7 @@ body {
 .dropdown-content li {
 	list-style: none;
 	flex: 33.3%;
+	cursor: pointer;
 }
 
 .tags {
