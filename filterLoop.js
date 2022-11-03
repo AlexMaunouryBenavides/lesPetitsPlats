@@ -39,8 +39,10 @@ createList(recipes);
 
 // Evenement recherche sur input
 searchInput.addEventListener("input", (e) => {
+	//stock du tableau dans variables global pour pouvoir filtrer dedans
+	window.filteredRecipes = [];
 	//Affichage recettes ,depuis la liste filté, de la recherche voulue
-	const filterRecipes = filterRecipesByTag(recipes, ...getfilter());
+	window.filteredRecipes = filterRecipesByTag(recipes, ...getfilter());
 	if (e.target.value.length > 2) {
 		window.filteredRecipes = filterRecipesBySearchFor(window.filteredRecipes, e.target.value);
 		createList(window.filteredRecipes);

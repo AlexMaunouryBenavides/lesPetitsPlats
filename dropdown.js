@@ -112,12 +112,12 @@ function generateList(id, tableau) {
 		input.classList.toggle("close");
 		if (input.classList.contains("close")) {
 			const dropDown = document.getElementById(`${id}`);
-			btnDropdowns[0].style.background = "#3282f7";
+
 			dropDown.innerHTML = "";
 			dropDown.style.display = "none";
 		} else {
-			btnDropdowns[0].style.background = "red";
-			btnDropdowns[0].style.borderRadius = "";
+			//btnDropdowns[0].style.background = "red";
+			//btnDropdowns[0].style.borderRadius = "";
 			//obj.style.removeProperty("border");
 
 			updateGenerateList(id, filterList(tableau, input.value));
