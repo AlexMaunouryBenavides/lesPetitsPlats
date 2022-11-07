@@ -1,6 +1,6 @@
-import { recipes } from "./recipes.js";
-import { createList } from "./card.js";
-import { filterRecipesByTag, getfilter } from "./dropdown.js";
+import { recipes } from "../data/recipes.js";
+import { createList } from "../scripts/card.js";
+import { filterRecipesByTag, getfilter } from "../scripts/dropdown.js";
 
 const searchInput = document.getElementById("txtSearch");
 

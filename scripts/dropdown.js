@@ -1,6 +1,6 @@
-import { recipes } from "./recipes.js";
+import { recipes } from "../data/recipes.js";
 import { createList } from "./card.js";
-import { filterRecipesBySearchFor } from "./filterLoop.js";
+import { filterRecipesBySearchFor } from "../filters/filterLoop.js";
 
 //Fonction filtre sur les tags
 export function filterRecipesByTag(recipes, filterIngredients, filterUstancils, filterAppareils) {
@@ -160,6 +160,7 @@ function updateGenerateList(id, tableau) {
 }
 export function getfilter() {
 	const listeIdFilter = ["Ingredients", "Ustensils", "Appareils"];
+
 	const filtres = document.querySelector(".filtres-actifs");
 	return listeIdFilter.map((id) => {
 		return [...filtres.querySelectorAll(`.${id}-tag span`)].map((tag) => {
