@@ -1,10 +1,10 @@
-import { recipes } from "./recipes.js";
-import { createList } from "./card.js";
-import { filterRecipesByTag, getfilter } from "./dropdown.js";
+import { recipes } from "../data/recipes.js";
+import { createList } from "../scripts/card.js";
+import { filterRecipesByTag, getfilter } from "../scripts/dropdown.js";
 
 const searchInput = document.getElementById("txtSearch");
 
-//FILTRE PRINCIPALE  (filter)
+//FILTRE INPUT PRINCIPALE
 export function filterRecipesBySearch(recipes, userInput) {
 	return recipes.filter((item) => {
 		return (
@@ -15,25 +15,6 @@ export function filterRecipesBySearch(recipes, userInput) {
 		);
 	});
 }
-
-//FILTRE PRINCIPALE  (for)
-export function filterRecipesBySearchFor(recipes, userInput) {
-	const recipiesFormat = [];
-	for (let i = 0; i < recipes.length; i++) {
-		let recipe = recipes[i];
-		if (recipe.name.toLowerCase().includes(userInput) || recipe.description.toLowerCase().includes(userInput)) {
-			recipiesFormat.push(recipe);
-			continue;
-		}
-		for (let a = 0; a < recipe.ingredients.length; a++) {
-			if (recipe.ingredients[a].ingredient.toLowerCase().includes(userInput)) {
-				recipiesFormat.push(recipe);
-			}
-		}
-	}
-	return recipiesFormat;
-}
-
 // Creation des cartes depuis la liste des recettes
 createList(recipes);
 
@@ -44,10 +25,10 @@ searchInput.addEventListener("input", (e) => {
 	//Affichage recettes ,depuis la liste filté, de la recherche voulue
 	window.filteredRecipes = filterRecipesByTag(recipes, ...getfilter());
 	if (e.target.value.length > 2) {
-		window.filteredRecipes = filterRecipesBySearchFor(window.filteredRecipes, e.target.value);
+		window.filteredRecipes = filterRecipesBySearch(window.filteredRecipes, e.target.value);
 		createList(window.filteredRecipes);
 	} else {
-		//affichage de toute la liste de recette
+		//affichage de toute la liste de recette (filtrer sur les tags)
 		createList(window.filteredRecipes);
 	}
 });

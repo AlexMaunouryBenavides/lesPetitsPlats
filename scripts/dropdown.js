@@ -1,6 +1,6 @@
-import { recipes } from "./recipes.js";
+import { recipes } from "../data/recipes.js";
 import { createList } from "./card.js";
-import { filterRecipesBySearchFor } from "./filterLoop.js";
+import { filterRecipesBySearchFor } from "../filters/filterLoop.js";
 
 //Fonction filtre sur les tags
 export function filterRecipesByTag(recipes, filterIngredients, filterUstancils, filterAppareils) {
