@@ -1,4 +1,4 @@
-import { recipes } from "./recipes.js";
+import { recipes } from "../data/recipes.js";
 import { createList } from "../scripts/card.js";
 import { filterRecipesByTag, getfilter } from "../scripts/dropdown.js";
 

@@ -1,6 +1,6 @@
 import { recipes } from "../data/recipes.js";
 import { createList } from "./card.js";
-import { filterRecipesBySearchFor } from "../filters/filterLoop.js";
+import { filterRecipesBySearch } from "../filters/filtreFilter.js";
 
 //Fonction filtre sur les tags
 export function filterRecipesByTag(recipes, filterIngredients, filterUstancils, filterAppareils) {
@@ -98,7 +98,7 @@ function createTags(label, id, tableau) {
 		div.remove();
 		const searchInput = document.getElementById("txtSearch");
 		const filterRecipes = filterRecipesByTag(recipes, ...getfilter());
-		createList(filterRecipesBySearchFor(filterRecipes, searchInput.value));
+		createList(filterRecipesBySearch(filterRecipes, searchInput.value));
 	});
 	return div;
 }
