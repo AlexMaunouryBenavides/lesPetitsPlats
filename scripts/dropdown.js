@@ -1,47 +1,53 @@
 import { recipes } from "../data/recipes.js";
 import { createList } from "./card.js";
+<<<<<<< HEAD
 import { filterRecipesBySearch } from "../filters/filtreFilter.js";
+=======
+import { filterRecipesBySearchFor } from "../filters/filterLoop.js";
+>>>>>>> 200c00696564a6d10292b87b58e90f53809c0a5b
 
-//Fonction filtre sur les tags
+// Fonction filtre sur les tags
 export function filterRecipesByTag(recipes, filterIngredients, filterUstancils, filterAppareils) {
 	let recipesFilter = recipes;
 	if (filterIngredients.length > 0) {
-		recipesFilter = recipes.filter((recipe) => {
-			return filterIngredients
+		recipesFilter = recipes.filter((recipe) =>
+			filterIngredients
 				.map((ingredientToFilter) => ingredientToFilter.toLowerCase())
-				.every((ingredientToFilter) => {
-					return recipe.ingredients
+				.every((ingredientToFilter) =>
+					recipe.ingredients
 						.map((infoIngredient) => infoIngredient.ingredient.toLowerCase())
-						.includes(ingredientToFilter);
-				});
-		});
+						.includes(ingredientToFilter)
+				)
+		);
 	}
 	if (filterUstancils.length > 0) {
-		recipesFilter = recipesFilter.filter((recipe) => {
-			return filterUstancils
+		recipesFilter = recipesFilter.filter((recipe) =>
+			filterUstancils
 				.map((ustancilToFilter) => ustancilToFilter.toLowerCase())
-				.every((ustancilToFilter) => {
-					return recipe.ustensils.map((ustensils) => ustensils.toLowerCase()).includes(ustancilToFilter);
-				});
-		});
+				.every((ustancilToFilter) =>
+					recipe.ustensils.map((ustensils) => ustensils.toLowerCase()).includes(ustancilToFilter)
+				)
+		);
 	}
 	if (filterAppareils.length > 0) {
-		recipesFilter = recipesFilter.filter((recipe) => {
-			return (
-				filterAppareils.filter((appareilsToFilter) => {
-					return appareilsToFilter.toLowerCase().includes(recipe.appliance.toLowerCase());
-				}).length > 0
-			);
-		});
+		recipesFilter = recipesFilter.filter(
+			(recipe) =>
+				filterAppareils.filter((appareilsToFilter) =>
+					appareilsToFilter.toLowerCase().includes(recipe.appliance.toLowerCase())
+				).length > 0
+		);
 	}
 
 	return recipesFilter;
 }
 
-//Recup des INGREDIENTS dans nouveau tableau
+// Recup des INGREDIENTS dans nouveau tableau
 function recupeIngredients(recipes) {
+	if(!window.filterRecipes ) {
+		window.filteredRecipes = recipes;
+	}
 	let tableau = [];
-	recipes.forEach((recipe) => {
+	window.filteredRecipes.forEach((recipe) => {
 		tableau = [
 			...tableau,
 			...recipe.ingredients.map(
@@ -54,7 +60,7 @@ function recupeIngredients(recipes) {
 	return tableau;
 }
 
-//Recup des USTENSILS dans nouveau tableau
+// Recup des USTENSILS dans nouveau tableau
 function recupeUstensils2(recipes) {
 	let tableau = [];
 	recipes.forEach((recipe) => {
@@ -80,7 +86,7 @@ function recupeAppareils2(recipes) {
 	return tableau;
 }
 
-//// Creation des TAGS ////
+/// / Creation des TAGS ////
 
 function createTags(label, id, tableau) {
 	const div = document.createElement("div");
@@ -92,8 +98,8 @@ function createTags(label, id, tableau) {
 
 	div.appendChild(span);
 	div.appendChild(closeBtn);
-	//Supression tags et renvoie dans la liste apres supression
-	closeBtn.addEventListener("click", function () {
+	// Supression tags et renvoie dans la liste apres supression
+	closeBtn.addEventListener("click", () => {
 		updateGenerateList(id, tableau);
 		div.remove();
 		const searchInput = document.getElementById("txtSearch");
@@ -106,7 +112,7 @@ function createTags(label, id, tableau) {
 // Fonction open/close(creer/detruit) liste des boutons
 function generateList(id, tableau) {
 	const input = document.getElementById(`input${id}`);
-	const btnDropdowns = document.querySelectorAll(".dropdowns"); //essaie changer la bordure des dropdowns
+	//const btnDropdowns = document.querySelectorAll(".dropdowns"); // essaie changer la bordure des dropdowns
 	input.classList.add("close");
 	input.addEventListener("click", () => {
 		input.classList.toggle("close");
@@ -116,14 +122,14 @@ function generateList(id, tableau) {
 			dropDown.innerHTML = "";
 			dropDown.style.display = "none";
 		} else {
-			//btnDropdowns[0].style.background = "red";
-			//btnDropdowns[0].style.borderRadius = "";
-			//obj.style.removeProperty("border");
+			// btnDropdowns[0].style.background = "red";
+			// btnDropdowns[0].style.borderRadius = "";
+			// obj.style.removeProperty("border");
 
 			updateGenerateList(id, filterList(tableau, input.value));
 		}
 	});
-	//fermer les listes au click sur le body
+	// fermer les listes au click sur le body
 	document.body.addEventListener("click", (e) => {
 		if (!e.target.closest(`#${id}, #input${id}, .tags `)) {
 			if (!input.classList.contains("close")) {
@@ -135,8 +141,9 @@ function generateList(id, tableau) {
 	});
 }
 
-//Nouvelle liste avec ajout des evenement
+// Nouvelle liste avec ajout des evenement
 function updateGenerateList(id, tableau) {
+	console.log(tableau);
 	const dropDown = document.getElementById(`${id}`);
 	dropDown.innerHTML = tableau.map((element) => `<li>${element}</li>`).join("");
 	dropDown.style.display = "flex";
@@ -145,10 +152,14 @@ function updateGenerateList(id, tableau) {
 	const dropDownLi = document.querySelectorAll(`#${id} li`);
 	const filtres = document.querySelector(".filtres-actifs");
 	dropDownLi.forEach((element) => {
-		element.addEventListener("click", function (e) {
+		element.addEventListener("click", (e) => {
 			e.stopPropagation(); // block l 'event  du parent pour pallier à la fermture de la liste
 			const tag = createTags(element.innerHTML, id, tableau, filtres);
 			filtres.prepend(tag);
+
+			if(!window.filterRecipes ) {
+				window.filteredRecipes = recipes;
+			}
 			window.filteredRecipes = filterRecipesByTag(window.filteredRecipes, ...getfilter());
 			createList(window.filteredRecipes);
 
@@ -162,44 +173,42 @@ export function getfilter() {
 	const listeIdFilter = ["Ingredients", "Ustensils", "Appareils"];
 
 	const filtres = document.querySelector(".filtres-actifs");
-	return listeIdFilter.map((id) => {
-		return [...filtres.querySelectorAll(`.${id}-tag span`)].map((tag) => {
-			return tag.innerHTML.toLowerCase();
-		});
-	});
+	return listeIdFilter.map((id) =>
+		[...filtres.querySelectorAll(`.${id}-tag span`)].map((tag) => tag.innerHTML.toLowerCase())
+	);
 }
 
 const listeFilter = [
 	{
 		id: "Ingredients",
-		tableau: recupeIngredients(recipes),
+		tableau: ()=> recupeIngredients(recipes),
 	},
 	{
 		id: "Ustensils",
-		tableau: recupeUstensils2(recipes),
+		tableau: ()=> recupeUstensils2(recipes),
 	},
 	{
 		id: "Appareils",
-		tableau: recupeAppareils2(recipes),
+		tableau: ()=> recupeAppareils2(recipes),
 	},
 ];
 
 listeFilter.forEach((liste) => {
-	generateList(liste.id, liste.tableau);
+	generateList(liste.id, liste.tableau());
 	const input = document.getElementById(`input${liste.id}`);
 	input.addEventListener("input", (e) =>
-		updateGenerateList(liste.id, filterList(liste.tableau, e.target.value.toLowerCase()))
+		updateGenerateList(liste.id, filterList(liste.tableau(), e.target.value.toLowerCase()))
 	);
 });
 
 // Fonction filtre des boutons avec method filter()
 function filterList(tableau, value) {
 	if (value) {
-		//si filtre
-		const tableauFilter = tableau.filter((item) => {
-			return item.toLowerCase().includes(value); //on filtre et on return
-		});
+		// si filtre
+		const tableauFilter = tableau.filter(
+			(item) => item.toLowerCase().includes(value) // on filtre et on return
+		);
 		return [...new Set(tableauFilter)];
 	}
-	return tableau; //sinon retourne le tableau de base
+	return tableau; // sinon retourne le tableau de base
 }
