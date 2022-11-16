@@ -39,7 +39,7 @@ export function filterRecipesByTag(recipes, filterIngredients, filterUstancils, 
 
 // Recup des INGREDIENTS dans nouveau tableau
 function recupeIngredients(recipes) {
-	if(!window.filterRecipes ) {
+	if(!window.filteredRecipes ) {
 		window.filteredRecipes = recipes;
 	}
 	let tableau = [];
@@ -153,7 +153,7 @@ function updateGenerateList(id, tableau) {
 			const tag = createTags(element.innerHTML, id, tableau, filtres);
 			filtres.prepend(tag);
 
-			if(!window.filterRecipes ) {
+			if(!window.filteredRecipes ) {
 				window.filteredRecipes = recipes;
 			}
 			window.filteredRecipes = filterRecipesByTag(window.filteredRecipes, ...getfilter());
